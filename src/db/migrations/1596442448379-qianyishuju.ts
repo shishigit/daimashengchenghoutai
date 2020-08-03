@@ -14,5 +14,4 @@ export class qianyishuju1596442448379 implements MigrationInterface
         await queryRunner.query("DROP INDEX `IDX_8be491adfcec3c9ae1bbdbbb8e` ON `jiekou`");
         await queryRunner.query("DROP TABLE `jiekou`");
     }
-
 }

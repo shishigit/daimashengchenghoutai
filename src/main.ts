@@ -1,7 +1,7 @@
 import {NestFactory} from '@nestjs/core';
 import {AppModule} from './app.module';
 import {peizhiwenjian} from "./config/peizhiwenjian";
-import {httpJianquan, kaifaRizhi, xitongRizhi} from "./config/zaxiang";
+import {httpJianquan, kaifaRizhi, memorysession, xitongRizhi} from "./config/zaxiang";
 import {HttpYichang, ShujukuYichang, YichangXitongTuichu} from "./config/xitongyichang";
 import {gengxinJiekou} from "./config/zhujie";
 

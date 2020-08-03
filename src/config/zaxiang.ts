@@ -4,6 +4,8 @@ import {peizhiwenjian} from "./peizhiwenjian";
 import {Observable} from "rxjs";
 import {Request} from "express";
 import {tap} from "rxjs/operators";
+import * as session from 'express-session';
+import * as memorystore from 'memorystore';
 
 /*************************************************************************
  * 系统运行日志

@@ -2,6 +2,8 @@ import {JJYBody, JJYController, JJYPost} from '../config/zhujie';
 import {httpjiekou_shujuyuan} from "../qianhoutongyong/http.jiekou";
 import {sqlSjkLianjie} from "../db/sql/sql.sjk.lianjie";
 import {SjkLianjie} from "../db/entities/sjk.lianjie";
+import {YichangTishi} from "../config/xitongyichang";
+import {shujukuleixing_list} from "../config/zaxiang";
 
 @JJYController('shujuyuan', '数据源接口')
 export class CtrlShujuyuan
@@ -28,6 +30,9 @@ export class CtrlShujuyuan
         @JJYBody() canshu: httpjiekou_shujuyuan.tianjia.Req,
     ): Promise<httpjiekou_shujuyuan.tianjia.Res>
     {
+        if (!shujukuleixing_list.map(value => value as string).includes(canshu.type))
+            throw new YichangTishi(`暂不支持 ${canshu.type} 的操作`)
+
         let lianjie = new SjkLianjie()
         Object.assign(lianjie, canshu)
         await lianjie.save()

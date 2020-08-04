@@ -156,7 +156,7 @@ export interface JJYSession
 /**
  * 当前系统支持的数据库类型
  */
-export const shujukuleixing = ['mysql', 'mariadb'] as const
+export const shujukuleixing_list = ['mysql', 'mariadb'] as const
 
 /*************************************************************************
  * Http Session

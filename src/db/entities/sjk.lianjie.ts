@@ -1,7 +1,7 @@
 import {BaseEntity, Column, Entity, PrimaryGeneratedColumn} from "typeorm";
-import {shujukuleixing} from "../../config/zaxiang";
+import {shujukuleixing_list} from "../../config/zaxiang";
 
-type shujukuleixing = (typeof shujukuleixing)[number]
+type shujukuleixing_type = (typeof shujukuleixing_list)[number]
 
 @Entity({name: 'sjk_lianjie'})
 export class SjkLianjie extends BaseEntity
@@ -13,7 +13,7 @@ export class SjkLianjie extends BaseEntity
     mingcheng: string
 
     @Column({nullable: false, comment: '数据库类型'})
-    type: shujukuleixing
+    type: shujukuleixing_type
 
     @Column({nullable: false, comment: 'IP地址'})
     host: string

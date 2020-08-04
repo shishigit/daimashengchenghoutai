@@ -3,7 +3,7 @@ import {METHOD_METADATA, PATH_METADATA} from '@nestjs/common/constants';
 import {Type} from '@nestjs/common/interfaces';
 import {YichangXitongTuichu} from './xitongyichang';
 import {XtJiekou} from "../db/entities/xt.jiekou";
-import {sqlJiekou} from "../db/sql/sql.jiekou";
+import {sqlXtJiekou} from "../db/sql/sql.xt.jiekou";
 import {JianquanLeixing, urlQuanxian} from "./zaxiang";
 
 const PATH_SHUOMING = 'PATH_SHUOMING';
@@ -20,18 +20,18 @@ const suoyouJiekou: XtJiekou[] = [];
  */
 export async function gengxinJiekou()
 {
-    await sqlJiekou.update({ qiyong: true }, { qiyong: false });
+    await sqlXtJiekou.update({qiyong: true}, {qiyong: false});
 
     for (const jiekou of suoyouJiekou)
     {
-        if (await sqlJiekou.existByUrl(jiekou.url))
-            await sqlJiekou.updateByUrl(jiekou);
+        if (await sqlXtJiekou.existByUrl(jiekou.url))
+            await sqlXtJiekou.updateByUrl(jiekou);
         else
             await jiekou.save();
 
         urlQuanxian[jiekou.url] = jiekou.jianquan;
 
-        await sqlJiekou.deleteFeiqi();
+        await sqlXtJiekou.deleteFeiqi();
     }
 }
 

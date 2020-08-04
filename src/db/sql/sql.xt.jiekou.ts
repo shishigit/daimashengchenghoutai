@@ -2,7 +2,7 @@ import {FindConditions} from 'typeorm';
 import {QueryDeepPartialEntity} from 'typeorm/query-builder/QueryPartialEntity';
 import {XtJiekou} from "../entities/xt.jiekou";
 
-class SqlJiekou
+class SqlXtJiekou
 {
     async existByUrl(url: string | XtJiekou): Promise<boolean>
     {
@@ -27,4 +27,4 @@ class SqlJiekou
     }
 }
 
-export const sqlJiekou = new SqlJiekou();
+export const sqlXtJiekou = new SqlXtJiekou();

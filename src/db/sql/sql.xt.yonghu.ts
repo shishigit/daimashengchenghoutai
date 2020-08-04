@@ -1,6 +1,6 @@
 import {XtYonghu} from "../entities/xt.yonghu";
 
-class SqlYonghu
+class SqlXtYonghu
 {
     findByZhanghao(zhanghao: string): Promise<XtYonghu>
     {
@@ -8,4 +8,4 @@ class SqlYonghu
     }
 }
 
-export const sqlYonghu = new SqlYonghu();
+export const sqlXtYonghu = new SqlXtYonghu();

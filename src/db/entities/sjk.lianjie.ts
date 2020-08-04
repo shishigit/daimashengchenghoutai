@@ -1,6 +1,8 @@
 import {BaseEntity, Column, Entity, PrimaryGeneratedColumn} from "typeorm";
 
-export type shujukuleixing = 'mysql' | 'mariadb'
+export const shujukuleixing = ['mysql', 'mariadb'] as const
+
+type shujukuleixing = (typeof shujukuleixing)[number]
 
 @Entity({name: 'sjk_lianjie'})
 export class SjkLianjie extends BaseEntity

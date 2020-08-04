@@ -14,15 +14,12 @@ async function ceshi()
     lianjie.port = 3306
     lianjie.host = 'localhost'
 
-    let service = await ShujukuService.instance(lianjie)
-    let tablename = await service.huoqu_tablename()
-    let table = await service.huoqu_table(tablename)
+    let service = await ShujukuService.huoqu_table(lianjie)
 
-    console.log(table)
-    await service.close()
+    console.log(service)
 }
 
-// ceshi().catch(reason =>
-// {
-//     console.log(reason)
-// })
+ceshi().catch(reason =>
+{
+    console.log(reason)
+})

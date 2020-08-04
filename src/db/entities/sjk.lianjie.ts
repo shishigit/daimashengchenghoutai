@@ -1,9 +1,9 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {BaseEntity, Column, Entity, PrimaryGeneratedColumn} from "typeorm";
 
 export type shujukuleixing = 'mysql' | 'mariadb'
 
 @Entity({name: 'sjk_lianjie'})
-export class SjkLianjie
+export class SjkLianjie extends BaseEntity
 {
     @PrimaryGeneratedColumn({comment: 'ID'})
     id: number;

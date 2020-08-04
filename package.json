@@ -6,6 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "ceshi": "ts-node ceshi/ceshi.ts",
     "build": "nest build",
     "migration": "typeorm migration:generate -n qianyishuju",
     "start": "nest start",

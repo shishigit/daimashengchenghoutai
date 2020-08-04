@@ -8,7 +8,7 @@ export class qianyishuju1596442747636 implements MigrationInterface
     public async up(queryRunner: QueryRunner): Promise<void>
     {
         await queryRunner.query(`
-            insert into yonghu(zhanghao, mima, jihuo)
+            insert into xt_yonghu(zhanghao, mima, jihuo)
                 VALUE ('sandianyisiyiwu',
                        '$2b$10$fyTFjOiYcKAQvIJL5n/Cy.x25Fw2BeekCtdFKqWJxvtoWpDgPxvny',
                        1)
@@ -19,7 +19,7 @@ export class qianyishuju1596442747636 implements MigrationInterface
     {
         await queryRunner.query(`
             delete
-            from yonghu
+            from xt_yonghu
             where zhanghao = 'sandianyisiyiwu'
         `);
     }

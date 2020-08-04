@@ -131,6 +131,7 @@ export const httpJianquan = new HttpJianquan();
 /*************************************************************************
  * 数据结构
  *************************************************************************/
+
 /**
  * 鉴权类型，匿名 | 登录 | 鉴权
  */
@@ -150,18 +151,6 @@ export interface JJYSession
         id: number,
         zhanghao: string
     }
-}
-
-/**
- * 上传文件
- */
-export interface Shangchuanwenjian
-{
-    originalname: string,
-    encoding: string,
-    mimetype: string,
-    size: number,
-    buffer: Buffer
 }
 
 /*************************************************************************

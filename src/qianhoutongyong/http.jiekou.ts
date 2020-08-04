@@ -34,3 +34,18 @@ export namespace httpjiekou_xitong
         }
     }
 }
+
+export namespace httpjiekou_shujuyuan
+{
+    export namespace chaxun
+    {
+        export interface Req
+        {
+            mingcheng: string
+        }
+
+        export interface Res
+        {
+        }
+    }
+}

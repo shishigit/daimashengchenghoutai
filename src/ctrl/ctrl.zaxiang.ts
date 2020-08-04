@@ -1,6 +1,6 @@
 import {JJYBody, JJYController, JJYPost} from '../config/zhujie';
 import {httpjiekou_zaxiang} from "../qianhoutongyong/http.jiekou";
-import {shujukuleixing} from "../db/entities/sjk.lianjie";
+import {shujukuleixing} from "../config/zaxiang";
 
 @JJYController('zaxiang', '杂项接口')
 export class CtrlZaxiang

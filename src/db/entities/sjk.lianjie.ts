@@ -1,6 +1,5 @@
 import {BaseEntity, Column, Entity, PrimaryGeneratedColumn} from "typeorm";
-
-export const shujukuleixing = ['mysql', 'mariadb'] as const
+import {shujukuleixing} from "../../config/zaxiang";
 
 type shujukuleixing = (typeof shujukuleixing)[number]
 

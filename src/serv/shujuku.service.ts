@@ -27,20 +27,22 @@ export class ShujukuService
         return ret
     }
 
-    async huoqu_table()
+    async huoqu_table(): Promise<string[]>
     {
-        switch (this.lianjie.options.type)
+        if (['mysql', 'mariadb'].includes(this.lianjie.options.type))
         {
-            case "mysql":
-            case "mariadb":
-                return await this.lianjie.query(
+            let ls: { TABLE_NAME: string }[] =
+                await this.lianjie.query(
                         `select distinct TABLE_NAME
                          from \`INFORMATION_SCHEMA\`.\`TABLES\`
                          WHERE TABLE_SCHEMA = ? `,
                     [this.lianjie.options.database])
-            default:
-                throw new YichangTishi(`暂不支持 ${this.lianjie.options.type} 的操作`)
+
+            return ls.map(value => value.TABLE_NAME)
         }
+
+        throw new YichangTishi(`暂不支持 ${this.lianjie.options.type} 的操作`)
+
     }
 
     async close()

@@ -7,6 +7,11 @@ class SqlSjkLianjie
     {
         return SjkLianjie.find({where: {mingcheng: Like(`%${mingcheng}%`)}})
     }
+
+    deleteByID(id: number)
+    {
+        return SjkLianjie.delete({id});
+    }
 }
 
 export const sqlSjkLianjie = new SqlSjkLianjie()

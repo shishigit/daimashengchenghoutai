@@ -7,6 +7,14 @@ import {SjkLianjie} from "../db/entities/sjk.lianjie";
 export class CtrlShujuyuan
 {
 
+    @JJYPost('shanchu', '删除')
+    async shanchu(
+        @JJYBody() canshu: httpjiekou_shujuyuan.shanchu.Req,
+    ): Promise<httpjiekou_shujuyuan.shanchu.Res>
+    {
+        return sqlSjkLianjie.deleteByID(canshu.id)
+    }
+
     @JJYPost('chaxun', '查询')
     async chaxun(
         @JJYBody() canshu: httpjiekou_shujuyuan.chaxun.Req,

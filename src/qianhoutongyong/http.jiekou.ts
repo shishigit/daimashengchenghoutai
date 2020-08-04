@@ -74,4 +74,29 @@ export namespace httpjiekou_shujuyuan
         {
         }
     }
+    export namespace shanchu
+    {
+        export interface Req
+        {
+            id: number
+        }
+
+        export interface Res
+        {
+
+        }
+    }
+}
+
+export namespace httpjiekou_zaxiang
+{
+    export namespace shujukuleixing
+    {
+        export interface Req
+        {
+
+        }
+
+        export type Res = string[]
+    }
 }

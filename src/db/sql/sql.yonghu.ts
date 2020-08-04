@@ -1,10 +1,10 @@
-import {Yonghu} from "../entities/yonghu";
+import {XtYonghu} from "../entities/xt.yonghu";
 
 class SqlYonghu
 {
-    findByZhanghao(zhanghao: string): Promise<Yonghu>
+    findByZhanghao(zhanghao: string): Promise<XtYonghu>
     {
-        return Yonghu.findOne({where: {zhanghao}});
+        return XtYonghu.findOne({where: {zhanghao}});
     }
 }
 

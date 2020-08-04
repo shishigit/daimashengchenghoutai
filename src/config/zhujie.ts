@@ -1,8 +1,8 @@
-import { All, Body, Controller, Get, PipeTransform, Post, RequestMethod } from '@nestjs/common';
-import { METHOD_METADATA, PATH_METADATA } from '@nestjs/common/constants';
-import { Type } from '@nestjs/common/interfaces';
-import { YichangXitongTuichu } from './xitongyichang';
-import {Jiekou} from "../db/entities/jiekou";
+import {All, Body, Controller, Get, PipeTransform, Post, RequestMethod} from '@nestjs/common';
+import {METHOD_METADATA, PATH_METADATA} from '@nestjs/common/constants';
+import {Type} from '@nestjs/common/interfaces';
+import {YichangXitongTuichu} from './xitongyichang';
+import {XtJiekou} from "../db/entities/xt.jiekou";
 import {sqlJiekou} from "../db/sql/sql.jiekou";
 import {JianquanLeixing, urlQuanxian} from "./zaxiang";
 
@@ -12,7 +12,7 @@ const PATH_JIANQUAN = 'PATH_JIANQUAN';
 /**
  * 系统当前包含的所有接口，不含已经废除的接口
  */
-const suoyouJiekou: Jiekou[] = [];
+const suoyouJiekou: XtJiekou[] = [];
 
 // noinspection JSUnusedGlobalSymbols
 /**
@@ -55,7 +55,7 @@ export function JJYController(prefixOrOptions: string, fenzu: string): ClassDeco
                 let url = `/${prefixOrOptions}/${Reflect.getMetadata(PATH_METADATA, value)}`;
                 if (url.includes('//') || url.includes('_')) throw new YichangXitongTuichu(`错误的URL：${url}`);
 
-                let jiekou = new Jiekou(
+                let jiekou = new XtJiekou(
                     url,
                     Reflect.getMetadata(METHOD_METADATA, value) as RequestMethod,
                     fenzu,

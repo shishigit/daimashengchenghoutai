@@ -6,7 +6,7 @@ import {JianquanLeixing} from "../../config/zaxiang";
  * 系统提供的接口
  */
 @Entity({name: 'xt_jiekou'})
-export class Jiekou extends BaseEntity
+export class XtJiekou extends BaseEntity
 {
     @PrimaryGeneratedColumn({comment: 'ID'})
     id: number;

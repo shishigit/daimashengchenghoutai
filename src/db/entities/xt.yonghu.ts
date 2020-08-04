@@ -1,7 +1,7 @@
 import {BaseEntity, Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
 
 @Entity({name: 'xt_yonghu'})
-export class Yonghu extends BaseEntity
+export class XtYonghu extends BaseEntity
 {
     @PrimaryGeneratedColumn({comment: 'ID'})
     id: number;

@@ -5,7 +5,7 @@ import {Response} from 'express';
 import {peizhiwenjian} from '../config/peizhiwenjian';
 import {httpjiekou_xitong} from "../qianhoutongyong/http.jiekou";
 import {jiami, JJYSession} from "../config/zaxiang";
-import {Yonghu} from "../db/entities/yonghu";
+import {XtYonghu} from "../db/entities/xt.yonghu";
 import {sqlYonghu} from "../db/sql/sql.yonghu";
 
 @JJYController('xitong', '系统接口')
@@ -19,7 +19,7 @@ export class CtrlXitong
     {
         if (!body.zhanghao) throw  new YichangTishi('账号不能为空');
         if (!body.mima) throw  new YichangTishi('密码不能为空');
-        let yonghu: Yonghu = await sqlYonghu.findByZhanghao(body.zhanghao);
+        let yonghu: XtYonghu = await sqlYonghu.findByZhanghao(body.zhanghao);
         if (!yonghu || !yonghu.jihuo) throw new YichangTishi('账号或者密码错误！');
         let fuhe = jiami.fuhe(body.mima, yonghu.mima);
         if (!fuhe) throw new YichangTishi('账号或者密码错误！');

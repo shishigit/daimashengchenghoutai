@@ -27,6 +27,7 @@ export class CtrlHongtian
         return htXiangmus.map(value =>
         {
             return {
+                id: value.id,
                 mingcheng: value.mingcheng,
                 beizhu: value.beizhu,
                 shujukumingcheng: shujukus.filter(value1 => value1.id === value.shujuku as any).pop().mingcheng
@@ -39,10 +40,10 @@ export class CtrlHongtian
         @JJYBody() canshu: httpjiekou_hongtian.tianjia.Req,
     ): Promise<httpjiekou_hongtian.tianjia.Res>
     {
-        if (!canshu.type || canshu.type < 0)
+        if (!canshu.shujukuid || canshu.shujukuid < 0)
             throw new YichangTishi(`数据库不能为空`)
 
-        let shujuku = await sqlSjkLianjie.findByIds([canshu.type])
+        let shujuku = await sqlSjkLianjie.findByIds([canshu.shujukuid])
         if (shujuku.length === 0)
             throw new YichangTishi(`数据库不存在`)
 

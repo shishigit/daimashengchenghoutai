@@ -10,6 +10,11 @@ class SqlHtXiangmu
             loadRelationIds: true
         });
     }
+
+    deleteByID(id: number)
+    {
+        return HtXiangmu.delete({id});
+    }
 }
 
 export const sqlHtXiangmu = new SqlHtXiangmu()

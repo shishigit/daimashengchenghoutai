@@ -9,13 +9,13 @@ import {HtXiangmu} from "../db/entities/ht.xiangmu";
 export class CtrlHongtian
 {
 
-    // @JJYPost('shanchu', '删除')
-    // async shanchu(
-    //     @JJYBody() canshu: httpjiekou_shujuyuan.shanchu.Req,
-    // ): Promise<httpjiekou_shujuyuan.shanchu.Res>
-    // {
-    //     return sqlSjkLianjie.deleteByID(canshu.id)
-    // }
+    @JJYPost('shanchu', '删除')
+    async shanchu(
+        @JJYBody() canshu: httpjiekou_hongtian.shanchu.Req,
+    ): Promise<httpjiekou_hongtian.shanchu.Res>
+    {
+        return sqlHtXiangmu.deleteByID(canshu.id)
+    }
 
     @JJYPost('chaxun', '查询')
     async chaxun(

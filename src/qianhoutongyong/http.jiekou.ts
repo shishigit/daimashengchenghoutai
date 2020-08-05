@@ -37,6 +37,18 @@ export namespace httpjiekou_xitong
 
 export namespace httpjiekou_shujuyuan
 {
+    export namespace xialacaidan
+    {
+        export interface Req
+        {
+        }
+
+        export interface Res
+        {
+            id: number;
+            mingcheng: string
+        }
+    }
     export namespace chaxun
     {
         export interface Req

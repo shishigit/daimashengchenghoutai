@@ -17,6 +17,14 @@ export class CtrlShujuyuan
         return sqlSjkLianjie.deleteByID(canshu.id)
     }
 
+    @JJYPost('xialacaidan', '获取下拉菜单列表')
+    async xialacaidan(
+        @JJYBody() canshu: httpjiekou_shujuyuan.xialacaidan.Req,
+    ): Promise<httpjiekou_shujuyuan.xialacaidan.Res[]>
+    {
+        return sqlSjkLianjie.findAll()
+    }
+
     @JJYPost('chaxun', '查询')
     async chaxun(
         @JJYBody() canshu: httpjiekou_shujuyuan.chaxun.Req,

@@ -17,6 +17,11 @@ class SqlSjkLianjie
     {
         return SjkLianjie.findByIds(ids)
     }
+
+    findAll()
+    {
+        return SjkLianjie.find();
+    }
 }
 
 export const sqlSjkLianjie = new SqlSjkLianjie()

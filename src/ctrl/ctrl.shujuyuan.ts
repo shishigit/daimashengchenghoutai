@@ -4,6 +4,7 @@ import {sqlSjkLianjie} from "../db/sql/sql.sjk.lianjie";
 import {SjkLianjie} from "../db/entities/sjk.lianjie";
 import {YichangTishi} from "../config/xitongyichang";
 import {shujukuleixing_list} from "../config/zaxiang";
+import {ShujukuService} from "../serv/shujuku.service";
 
 @JJYController('shujuyuan', '数据源接口')
 export class CtrlShujuyuan
@@ -23,6 +24,16 @@ export class CtrlShujuyuan
     ): Promise<httpjiekou_shujuyuan.xialacaidan.Res[]>
     {
         return sqlSjkLianjie.findAll()
+    }
+
+    @JJYPost('table', '查询数据库表')
+    async table(
+        @JJYBody() canshu: httpjiekou_shujuyuan.table.Req,
+    ): Promise<httpjiekou_shujuyuan.table.Res>
+    {
+        let lianjie = await sqlSjkLianjie.findById(canshu.shujukuid)
+        let kubiaos = await ShujukuService.huoqu_table(lianjie)
+        return kubiaos.map(value => value.name)
     }
 
     @JJYPost('chaxun', '查询')

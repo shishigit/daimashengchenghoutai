@@ -32,7 +32,8 @@ export class ShujukuService
             port: this.sjkLianjie.port,
             username: this.sjkLianjie.username,
             password: this.sjkLianjie.password,
-            database: this.sjkLianjie.database
+            database: this.sjkLianjie.database,
+            name: Math.random().toString()
         })
 
         this.queryRunner = this.lianjie.createQueryRunner()

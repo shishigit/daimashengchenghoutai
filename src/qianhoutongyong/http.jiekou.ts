@@ -44,10 +44,7 @@ export namespace httpjiekou_shujuyuan
             shujukuid: number
         }
 
-        export interface Res
-        {
-
-        }
+        export type Res = string[]
     }
     export namespace xialacaidan
     {
@@ -166,6 +163,7 @@ export namespace httpjiekou_hongtian
             mingcheng: string
             beizhu: string
             shujukumingcheng: string
+            shujukuid: number
         }
     }
 }

@@ -22,6 +22,11 @@ class SqlSjkLianjie
     {
         return SjkLianjie.find();
     }
+
+    findById(shujukuid: number)
+    {
+        return SjkLianjie.findOne({where: {id: shujukuid}})
+    }
 }
 
 export const sqlSjkLianjie = new SqlSjkLianjie()

@@ -26,11 +26,13 @@ export class CtrlHongtian
         let shujukus = await sqlSjkLianjie.findByIds(htXiangmus.map(value => value.shujuku as any))
         return htXiangmus.map(value =>
         {
+            let shujuku = shujukus.filter(value1 => value1.id === value.shujuku as any).pop()
             return {
                 id: value.id,
                 mingcheng: value.mingcheng,
                 beizhu: value.beizhu,
-                shujukumingcheng: shujukus.filter(value1 => value1.id === value.shujuku as any).pop().mingcheng
+                shujukumingcheng: shujuku.mingcheng,
+                shujukuid: shujuku.id
             }
         })
     }

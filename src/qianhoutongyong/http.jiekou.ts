@@ -37,6 +37,18 @@ export namespace httpjiekou_xitong
 
 export namespace httpjiekou_shujuyuan
 {
+    export namespace table
+    {
+        export interface Req
+        {
+            shujukuid: number
+        }
+
+        export interface Res
+        {
+
+        }
+    }
     export namespace xialacaidan
     {
         export interface Req

@@ -4,7 +4,7 @@ import {YichangTishi} from '../config/xitongyichang';
 import {Response} from 'express';
 import {peizhiwenjian} from '../config/peizhiwenjian';
 import {httpjiekou_xitong} from "../qianhoutongyong/http.jiekou";
-import {jiami, JJYSession} from "../config/zaxiang";
+import {jiami, JJYSession, xitongRizhi} from "../config/zaxiang";
 import {XtYonghu} from "../db/entities/xt.yonghu";
 import {sqlXtYonghu} from "../db/sql/sql.xt.yonghu";
 
@@ -35,7 +35,12 @@ export class CtrlXitong
         @Session() session: JJYSession,
     ): Promise<httpjiekou_xitong.tuichu.Res>
     {
-        session.yonghu = undefined;
+        (session as Express.Session).destroy(err =>
+        {
+            if (!err) return
+            xitongRizhi.error(`销毁 Session 异常：${JSON.stringify(session.yonghu)}`)
+            xitongRizhi.error(err)
+        })
         return {};
     }
 

@@ -2,6 +2,8 @@ import {JJYBody, JJYController, JJYPost} from '../config/zhujie';
 import {httpjiekou_hongtian} from "../qianhoutongyong/http.jiekou";
 import {sqlHtXiangmu} from "../db/sql/sql.ht.xiangmu";
 import {sqlSjkLianjie} from "../db/sql/sql.sjk.lianjie";
+import {YichangTishi} from "../config/xitongyichang";
+import {HtXiangmu} from "../db/entities/ht.xiangmu";
 
 @JJYController('hongtian', '宏天项目接口')
 export class CtrlHongtian
@@ -32,17 +34,25 @@ export class CtrlHongtian
         })
     }
 
-    // @JJYPost('tianjia', '添加')
-    // async tianjia(
-    //     @JJYBody() canshu: httpjiekou_shujuyuan.tianjia.Req,
-    // ): Promise<httpjiekou_shujuyuan.tianjia.Res>
-    // {
-    //     if (!shujukuleixing_list.map(value => value as string).includes(canshu.type))
-    //         throw new YichangTishi(`暂不支持 ${canshu.type} 的操作`)
-    //
-    //     let lianjie = new SjkLianjie()
-    //     Object.assign(lianjie, canshu)
-    //     await lianjie.save()
-    //     return {}
-    // }
+    @JJYPost('tianjia', '添加')
+    async tianjia(
+        @JJYBody() canshu: httpjiekou_hongtian.tianjia.Req,
+    ): Promise<httpjiekou_hongtian.tianjia.Res>
+    {
+        if (!canshu.type || canshu.type < 0)
+            throw new YichangTishi(`数据库不能为空`)
+
+        let shujuku = await sqlSjkLianjie.findByIds([canshu.type])
+        if (shujuku.length === 0)
+            throw new YichangTishi(`数据库不存在`)
+
+
+        let htXiangmu = new HtXiangmu()
+        htXiangmu.shujuku = shujuku.pop()
+        htXiangmu.beizhu = canshu.beizhu
+        htXiangmu.mingcheng = canshu.mingcheng
+        await htXiangmu.save()
+
+        return {}
+    }
 }

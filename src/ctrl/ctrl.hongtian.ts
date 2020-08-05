@@ -20,6 +20,7 @@ export class CtrlHongtian
     ): Promise<httpjiekou_hongtian.chaxun.Res[]>
     {
         let xiangmu = await sqlHtXiangmu.findByMingcheng(canshu.mingcheng)
+        console.log(xiangmu)
 // let shujuku=sqlSjkLianjie.findByIds(xi)
         return []
     }

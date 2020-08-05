@@ -5,7 +5,10 @@ class SqlHtXiangmu
 {
     findByMingcheng(mingcheng: string)
     {
-        return HtXiangmu.find({where: {mingcheng: Like(`%${mingcheng}%`)}});
+        return HtXiangmu.find({
+            where: {mingcheng: Like(`%${mingcheng}%`)},
+            loadRelationIds: true
+        });
     }
 }
 

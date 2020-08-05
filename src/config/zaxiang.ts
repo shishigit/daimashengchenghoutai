@@ -107,6 +107,8 @@ class HttpJianquan implements CanActivate
 {
     async canActivate(context: ExecutionContext): Promise<boolean>
     {
+        if (peizhiwenjian.kaifa) return true
+
         if (context.getType() !== 'http') return false;
 
         const request = context.switchToHttp().getRequest();

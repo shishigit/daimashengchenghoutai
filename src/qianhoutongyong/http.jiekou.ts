@@ -100,3 +100,21 @@ export namespace httpjiekou_zaxiang
         export type Res = string[]
     }
 }
+
+export namespace httpjiekou_hongtian
+{
+    export namespace chaxun
+    {
+        export interface Req
+        {
+            mingcheng: string
+        }
+
+        export interface Res
+        {
+            mingcheng: string
+            beizhu: string
+            shujukumingcheng: string
+        }
+    }
+}

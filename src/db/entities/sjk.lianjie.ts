@@ -1,5 +1,6 @@
-import {BaseEntity, Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {shujukuleixing_list} from "../../config/zaxiang";
+import {HtXiangmu} from "./ht.xiangmu";
 
 type shujukuleixing_type = (typeof shujukuleixing_list)[number]
 
@@ -29,4 +30,7 @@ export class SjkLianjie extends BaseEntity
 
     @Column({nullable: false, comment: '数据库名称'})
     database: string
+
+    @OneToMany(() => HtXiangmu, htXiangmu => htXiangmu.shujuku)
+    htXiangmu: HtXiangmu[]
 }

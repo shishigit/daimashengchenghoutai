@@ -1,4 +1,5 @@
-import {BaseEntity, Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {SjkLianjie} from "./sjk.lianjie";
 
 @Entity({name: 'ht_xiangmu'})
 export class HtXiangmu extends BaseEntity
@@ -11,4 +12,7 @@ export class HtXiangmu extends BaseEntity
 
     @Column({comment: '备注'})
     beizhu: string
+
+    @ManyToOne(() => SjkLianjie, sjy => sjy.htXiangmu)
+    shujuku: SjkLianjie
 }

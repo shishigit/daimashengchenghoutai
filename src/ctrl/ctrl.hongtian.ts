@@ -1,6 +1,7 @@
 import {JJYBody, JJYController, JJYPost} from '../config/zhujie';
 import {httpjiekou_hongtian} from "../qianhoutongyong/http.jiekou";
 import {sqlHtXiangmu} from "../db/sql/sql.ht.xiangmu";
+import {sqlSjkLianjie} from "../db/sql/sql.sjk.lianjie";
 
 @JJYController('hongtian', '宏天项目接口')
 export class CtrlHongtian
@@ -19,10 +20,16 @@ export class CtrlHongtian
         @JJYBody() canshu: httpjiekou_hongtian.chaxun.Req,
     ): Promise<httpjiekou_hongtian.chaxun.Res[]>
     {
-        let xiangmu = await sqlHtXiangmu.findByMingcheng(canshu.mingcheng)
-        console.log(xiangmu)
-// let shujuku=sqlSjkLianjie.findByIds(xi)
-        return []
+        let htXiangmus = await sqlHtXiangmu.findByMingcheng(canshu.mingcheng)
+        let shujukus = await sqlSjkLianjie.findByIds(htXiangmus.map(value => value.shujuku as any))
+        return htXiangmus.map(value =>
+        {
+            return {
+                mingcheng: value.mingcheng,
+                beizhu: value.beizhu,
+                shujukumingcheng: shujukus.filter(value1 => value1.id === value.shujuku as any).pop().mingcheng
+            }
+        })
     }
 
     // @JJYPost('tianjia', '添加')

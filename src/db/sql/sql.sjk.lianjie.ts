@@ -12,6 +12,11 @@ class SqlSjkLianjie
     {
         return SjkLianjie.delete({id});
     }
+
+    findByIds(ids: number[])
+    {
+        return SjkLianjie.findByIds(ids)
+    }
 }
 
 export const sqlSjkLianjie = new SqlSjkLianjie()

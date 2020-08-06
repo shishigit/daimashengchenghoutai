@@ -7,7 +7,6 @@
     <% if (zhujian) { %>
         <id column="<%= zhujian.mingcheng %>" property="<%= zhujian.mingcheng %>"/>
     <% } %>
-
     <% shuxing_list.forEach(function(shuxing){ %>
         <result column="<%= shuxing.mingcheng %>" property="<%= shuxing.mingcheng %>"/>
     <% }) %>
@@ -16,7 +15,7 @@
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         <% shuxing_list.forEach(function(shuxing){ %>
-            <%= shuxing.mingcheng %>
+            <%= shuxing.mingcheng %>,
         <% }) %>
     </sql>
 

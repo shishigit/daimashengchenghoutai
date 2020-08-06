@@ -13,9 +13,9 @@ import io.swagger.annotations.ApiModelProperty;
 * @company 汉鑫科技股份有限公司
 */
 @ApiModel(value="<%= mingcheng %>对象", description="")
-public class <%= mingcheng %> extends BaseModel<<%= mingcheng %>> {
-
-private static final long serialVersionUID = 1L;
+public class <%= mingcheng %> extends BaseModel<<%= mingcheng %>>
+{
+    private static final long serialVersionUID = 1L;
 
 <% if (zhujian) { %>
     @TableId(value = "<%= zhujian.miaoshu %>", type = IdType.ASSIGN_ID)
@@ -23,20 +23,19 @@ private static final long serialVersionUID = 1L;
 
     public <%= zhujian.leixing %> get<%= zhujian.pashikamingcheng %>()
     {
-    return <%= zhujian.mingcheng %>;
+        return <%= zhujian.mingcheng %>;
     }
 
     public void set<%= zhujian.pashikamingcheng %>(<%= zhujian.leixing %> <%= zhujian.mingcheng %>)
     {
-    this.<%= zhujian.mingcheng %> = <%= zhujian.mingcheng %>;
+        this.<%= zhujian.mingcheng %> = <%= zhujian.mingcheng %>;
     }
 
     @Override
     protected Serializable pkVal()
     {
-    return this.<%= zhujian.mingcheng %>;
+        return this.<%= zhujian.mingcheng %>;
     }
-
 <% } %>
 
 <% shuxing_list.forEach(function(shuxing){ %>
@@ -53,7 +52,6 @@ private static final long serialVersionUID = 1L;
     this.<%= shuxing.mingcheng %> = <%= shuxing.mingcheng %>;
     }
 <% }); %>
-
 
     @Override
     public String toString()

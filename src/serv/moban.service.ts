@@ -76,6 +76,14 @@ class HongtianMoban
         let managerjava = ejs.render(this._TestManager_java, shiti)
         zip.file(pascalcase(shiti.mingcheng) + 'Manager.java', managerjava)
 
+        let managervue = ejs.render(this._TestManager_vue_, shiti)
+        zip.file(pascalcase(shiti.mingcheng) + 'Manager.vue', managervue)
+
+        let managerimpl = ejs.render(this._TestManagerImpl_java, shiti)
+        zip.file(pascalcase(shiti.mingcheng) + 'ManagerImpl.java', managerimpl)
+
+        let mapper = ejs.render(this._TestMapper_xml_, shiti)
+        zip.file(pascalcase(shiti.mingcheng) + 'Mapper.xml', mapper)
 
         return zip.generateAsync({type: 'nodebuffer'})
     }

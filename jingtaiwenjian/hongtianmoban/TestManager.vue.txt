@@ -13,13 +13,14 @@
       <template v-slot:toolbar>
         <el-button-group>
           <el-button size="small" @click="showDialog()" icon="el-icon-plus">添加</el-button>
-          <ht-delete-button url="${form}/test/v1/" :htTable="$refs.htTable">删除</ht-delete-button>
+          <ht-delete-button url="${form}/<%= mingcheng %>/v1/" :htTable="$refs.htTable">删除</ht-delete-button>
         </el-button-group>
       </template>
       <template>
         <ht-table-column type="index" width="50" align="center" label="序号"/>
+    <% if (zhujian) { %>
         <ht-table-column
-                prop="id"
+                prop="<%= zhujian.mingcheng %>"
                 label=""
                 :sortable="true"
                 :show-overflow-tooltip="true"
@@ -33,27 +34,17 @@
             </el-link>
           </template>
         </ht-table-column>
+    <% } %>
+
+    <% shuxing_list.forEach(function(shuxing){ %>
         <ht-table-column
-                prop="name"
+                prop="<%= shuxing.mingcheng%>"
                 label=""
                 :sortable="true"
                 :show-overflow-tooltip="true"
         >
         </ht-table-column>
-        <ht-table-column
-                prop="des"
-                label=""
-                :sortable="true"
-                :show-overflow-tooltip="true"
-        >
-        </ht-table-column>
-        <ht-table-column
-                prop="tenantId"
-                label=""
-                :sortable="true"
-                :show-overflow-tooltip="true"
-        >
-        </ht-table-column>
+    <% }) %>
       </template>
     </ht-table>
     <ht-sidebar-dialog
@@ -63,26 +54,20 @@
             :visible="dialogVisible"
             :before-close="beforeCloseDialog"
     >
-      <el-form v-form data-vv-scope="TestForm">
+      <el-form v-form data-vv-scope="<%= mingcheng %>Form">
+      <% shuxing_list.forEach(function(shuxing){ %>
         <ht-form-item label="">
-          <ht-input v-model="Test.id" validate="required"/>
+          <ht-input v-model="<%= mingcheng %>.<%= shuxing.mingcheng %>" validate="required"/>
         </ht-form-item>
-        <ht-form-item label="">
-          <ht-input v-model="Test.name" validate="required"/>
-        </ht-form-item>
-        <ht-form-item label="">
-          <ht-input v-model="Test.des" validate="required"/>
-        </ht-form-item>
-        <ht-form-item label="">
-          <ht-input v-model="Test.tenantId" validate="required"/>
-        </ht-form-item>
+      <% }) %>
+
       </el-form>
       <div slot="footer" style="text-align: center">
         <ht-submit-button
-                url="${form}/test/v1/"
-                :model="Test"
+                url="${form}/<%= mingcheng %>/v1/"
+                :model="<%= mingcheng %>"
                 :request-method="saveMethod"
-                scope-name="TestForm"
+                scope-name="<%= mingcheng %>Form"
                 @after-save-data="afterSaveData"
         >{{$t("eip.common.save")}}
         </ht-submit-button>
@@ -102,7 +87,7 @@
           pageSize: 50,
           total: 0
         },
-        Test: {},
+        <%= mingcheng %>: {},
         saveMethod: "POST"
       };
     },
@@ -113,9 +98,9 @@
       showDialog(id) {
         if (id) {
           this.saveMethod = "PUT";
-          this.$http.get("${form}/test/v1/" + id).then(
+          this.$http.get("${form}/<%= mingcheng %>/v1/" + id).then(
                   resp => {
-                    this.Test = resp.data;
+                    this.<%= mingcheng %> = resp.data;
                     this.dialogVisible = true;
                   },
                   error => {
@@ -128,12 +113,12 @@
         }
       },
       beforeCloseDialog() {
-        this.Test = {};
+        this.<%= mingcheng %> = {};
         this.dialogVisible = false;
       },
       loadData(param, cb) {
         this.$http
-                .post("${form}/test/v1/query", param)
+                .post("${form}/<%= mingcheng %>/v1/query", param)
                 .then(
                         resp => {
                           let response = resp.data;

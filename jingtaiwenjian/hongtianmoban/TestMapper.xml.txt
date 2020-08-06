@@ -4,11 +4,13 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="<%= baoming %>.<%= mingcheng %>">
-        <id column="ID_" property="id"/>
+    <% if (zhujian) { %>
+        <id column="<%= zhujian.mingcheng %>" property="<%= zhujian.mingcheng %>"/>
+    <% } %>
 
-        <% shuxing_list.forEach(function(shuxing){ %>
-            <result column="<%= shuxing.mingcheng %>" property="<%= shuxing.mingcheng %>"/>
-        <% }) %>
+    <% shuxing_list.forEach(function(shuxing){ %>
+        <result column="<%= shuxing.mingcheng %>" property="<%= shuxing.mingcheng %>"/>
+    <% }) %>
     </resultMap>
 
     <!-- 通用查询结果列 -->

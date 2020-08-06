@@ -30,12 +30,12 @@ interface shiti_java
 class HongtianMoban
 {
     private _Test_java = fs.readFileSync(peizhiwenjian.jingtairoot + '/hongtianmoban/Test.java.ejs').toString()
-    private _TestController_java = fs.readFileSync(peizhiwenjian.jingtairoot + '/hongtianmoban/TestController.java').toString()
-    private _TestDao_java = fs.readFileSync(peizhiwenjian.jingtairoot + '/hongtianmoban/TestDao.java').toString()
-    private _TestManager_java = fs.readFileSync(peizhiwenjian.jingtairoot + '/hongtianmoban/TestManager.java').toString()
-    private _TestManager_vue_ = fs.readFileSync(peizhiwenjian.jingtairoot + '/hongtianmoban/TestManager.vue_').toString()
-    private _TestManagerImpl_java = fs.readFileSync(peizhiwenjian.jingtairoot + '/hongtianmoban/TestManagerImpl.java').toString()
-    private _TestMapper_xml_ = fs.readFileSync(peizhiwenjian.jingtairoot + '/hongtianmoban/TestMapper.xml_').toString()
+    private _TestController_java = fs.readFileSync(peizhiwenjian.jingtairoot + '/hongtianmoban/TestController.java.ejs').toString()
+    private _TestDao_java = fs.readFileSync(peizhiwenjian.jingtairoot + '/hongtianmoban/TestDao.java.ejs').toString()
+    private _TestManager_java = fs.readFileSync(peizhiwenjian.jingtairoot + '/hongtianmoban/TestManager.java.ejs').toString()
+    private _TestManager_vue_ = fs.readFileSync(peizhiwenjian.jingtairoot + '/hongtianmoban/TestManager.vue.ejs').toString()
+    private _TestManagerImpl_java = fs.readFileSync(peizhiwenjian.jingtairoot + '/hongtianmoban/TestManagerImpl.java.ejs').toString()
+    private _TestMapper_xml_ = fs.readFileSync(peizhiwenjian.jingtairoot + '/hongtianmoban/TestMapper.xml.ejs').toString()
 
     shengcheng(kubiao: Table, canshu: httpjiekou_hongtian.shengchengdaima.req)
     {
@@ -65,8 +65,11 @@ class HongtianMoban
         }
 
         let entity = ejs.render(this._Test_java, shiti)
-
         zip.file(pascalcase(shiti.mingcheng) + '.java', entity)
+
+        let controller = ejs.render(this._TestController_java, shiti)
+        zip.file(pascalcase(shiti.mingcheng) + 'Controller.java', controller)
+
 
         return zip.generateAsync({type: 'nodebuffer'})
     }

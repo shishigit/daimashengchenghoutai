@@ -4,7 +4,7 @@ import {Type} from '@nestjs/common/interfaces';
 import {YichangXitongTuichu} from './xitongyichang';
 import {XtJiekou} from "../db/entities/xt.jiekou";
 import {sqlXtJiekou} from "../db/sql/sql.xt.jiekou";
-import {JianquanLeixing, urlQuanxian} from "./zaxiang";
+import {JianquanLeixing, urlQuanxian} from "./shujujiegou";
 
 const PATH_SHUOMING = 'PATH_SHUOMING';
 const PATH_JIANQUAN = 'PATH_JIANQUAN';

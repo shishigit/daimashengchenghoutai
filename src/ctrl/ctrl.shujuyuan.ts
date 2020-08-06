@@ -3,8 +3,8 @@ import {httpjiekou_shujuyuan} from "../qianhoutongyong/http.jiekou";
 import {sqlSjkLianjie} from "../db/sql/sql.sjk.lianjie";
 import {SjkLianjie} from "../db/entities/sjk.lianjie";
 import {YichangTishi} from "../config/xitongyichang";
-import {shujukuleixing_list} from "../config/zaxiang";
 import {ShujukuService} from "../serv/shujuku.service";
+import {shujukuleixing_list} from "../config/shujujiegou";
 
 @JJYController('shujuyuan', '数据源接口')
 export class CtrlShujuyuan

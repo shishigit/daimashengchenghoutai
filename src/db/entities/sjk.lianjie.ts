@@ -1,6 +1,6 @@
 import {BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
-import {shujukuleixing_list} from "../../config/zaxiang";
 import {HtXiangmu} from "./ht.xiangmu";
+import {shujukuleixing_list} from "../../config/shujujiegou";
 
 type shujukuleixing_type = (typeof shujukuleixing_list)[number]
 

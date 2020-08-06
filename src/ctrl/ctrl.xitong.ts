@@ -4,10 +4,11 @@ import {YichangTishi} from '../config/xitongyichang';
 import {Response} from 'express';
 import {peizhiwenjian} from '../config/peizhiwenjian';
 import {httpjiekou_xitong} from "../qianhoutongyong/http.jiekou";
-import {jiami, JJYSession} from "../config/zaxiang";
+import {jiami} from "../config/zaxiang";
 import {XtYonghu} from "../db/entities/xt.yonghu";
 import {sqlXtYonghu} from "../db/sql/sql.xt.yonghu";
 import {rizhiService} from "../serv/rizhi.service";
+import {JJYSession} from "../config/shujujiegou";
 
 @JJYController('xitong', '系统接口')
 export class CtrlXitong

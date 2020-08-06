@@ -1,6 +1,6 @@
 import {BaseEntity, Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
 import {RequestMethod} from '@nestjs/common';
-import {JianquanLeixing} from "../../config/zaxiang";
+import {JianquanLeixing} from "../../config/shujujiegou";
 
 /**
  * 系统提供的接口

@@ -2,7 +2,7 @@ import {SjkLianjie} from "../db/entities/sjk.lianjie";
 import {Connection, createConnection} from "typeorm";
 import {YichangTishi} from "../config/xitongyichang";
 import {QueryRunner} from "typeorm/query-runner/QueryRunner";
-import {shujukuleixing_list} from "../config/zaxiang";
+import {shujukuleixing_list} from "../config/shujujiegou";
 
 export class ShujukuService
 {

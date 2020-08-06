@@ -1,13 +1,24 @@
-import {JJYBody, JJYController, JJYPost} from '../config/zhujie';
+import {JJYBody, JJYController, JJYPost, JJYRes} from '../config/zhujie';
 import {httpjiekou_hongtian} from "../qianhoutongyong/http.jiekou";
 import {sqlHtXiangmu} from "../db/sql/sql.ht.xiangmu";
 import {sqlSjkLianjie} from "../db/sql/sql.sjk.lianjie";
 import {YichangTishi} from "../config/xitongyichang";
 import {HtXiangmu} from "../db/entities/ht.xiangmu";
+import {Response} from "express";
 
 @JJYController('hongtian', '宏天项目接口')
 export class CtrlHongtian
 {
+
+    @JJYPost('shengchengdaima', '生成代码')
+    async shengchengdaima(
+        @JJYBody() canshu: httpjiekou_hongtian.shengchengdaima.req,
+        @JJYRes() res: Response,
+    )
+    {
+        res.attachment(encodeURI('配料数据.xlsx'));
+        res.end('await workBook.xlsx.writeBuffer()');
+    }
 
     @JJYPost('shanchu', '删除项目')
     async shanchu(

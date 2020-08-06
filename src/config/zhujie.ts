@@ -1,4 +1,4 @@
-import {All, Body, Controller, Get, PipeTransform, Post, RequestMethod} from '@nestjs/common';
+import {All, Body, Controller, Get, PipeTransform, Post, RequestMethod, Res} from '@nestjs/common';
 import {METHOD_METADATA, PATH_METADATA} from '@nestjs/common/constants';
 import {Type} from '@nestjs/common/interfaces';
 import {YichangXitongTuichu} from './xitongyichang';
@@ -43,7 +43,7 @@ export async function gengxinJiekou()
  */
 export function JJYController(prefixOrOptions: string, fenzu: string): ClassDecorator
 {
-    return function(target: object)
+    return function (target: object)
     {
         Object
             .getOwnPropertyNames((target as any).prototype)
@@ -73,7 +73,7 @@ export function JJYController(prefixOrOptions: string, fenzu: string): ClassDeco
 // noinspection JSUnusedGlobalSymbols
 export function JJYPost(path: string, path_shuoming: string, path_jianquan: JianquanLeixing = 'denglu'): MethodDecorator
 {
-    return function(target: Object, key: string | symbol, descriptor: TypedPropertyDescriptor<any>)
+    return function (target: Object, key: string | symbol, descriptor: TypedPropertyDescriptor<any>)
     {
         Reflect.defineMetadata(PATH_SHUOMING, path_shuoming, descriptor.value);
         Reflect.defineMetadata(PATH_JIANQUAN, path_jianquan, descriptor.value);
@@ -85,7 +85,7 @@ export function JJYPost(path: string, path_shuoming: string, path_jianquan: Jian
 // noinspection JSUnusedGlobalSymbols
 export function JJYGet(path: string, path_shuoming: string, path_jianquan: JianquanLeixing = 'denglu'): MethodDecorator
 {
-    return function(target: Object, key: string | symbol, descriptor: TypedPropertyDescriptor<any>)
+    return function (target: Object, key: string | symbol, descriptor: TypedPropertyDescriptor<any>)
     {
         Reflect.defineMetadata(PATH_SHUOMING, path_shuoming, descriptor.value);
         Reflect.defineMetadata(PATH_JIANQUAN, path_jianquan, descriptor.value);
@@ -97,7 +97,7 @@ export function JJYGet(path: string, path_shuoming: string, path_jianquan: Jianq
 // noinspection JSUnusedGlobalSymbols
 export function JJYAll(path: string, path_shuoming: string, path_jianquan: JianquanLeixing): MethodDecorator
 {
-    return function(target: Object, key: string | symbol, descriptor: TypedPropertyDescriptor<any>)
+    return function (target: Object, key: string | symbol, descriptor: TypedPropertyDescriptor<any>)
     {
         Reflect.defineMetadata(PATH_SHUOMING, path_shuoming, descriptor.value);
         Reflect.defineMetadata(PATH_JIANQUAN, path_jianquan, descriptor.value);
@@ -109,8 +109,17 @@ export function JJYAll(path: string, path_shuoming: string, path_jianquan: Jianq
 // noinspection JSUnusedGlobalSymbols
 export function JJYBody(property?: string, ...pipes: (Type<PipeTransform> | PipeTransform)[]): ParameterDecorator
 {
-    return function(target: Object, propertyKey: string | symbol, parameterIndex: number)
+    return function (target: Object, propertyKey: string | symbol, parameterIndex: number)
     {
         Body(property, ...pipes)(target, propertyKey, parameterIndex);
+    };
+}
+
+// noinspection JSUnusedGlobalSymbols
+export function JJYRes(): ParameterDecorator
+{
+    return function (target: Object, propertyKey: string | symbol, parameterIndex: number)
+    {
+        Res()(target, propertyKey, parameterIndex);
     };
 }

@@ -124,6 +124,15 @@ export namespace httpjiekou_zaxiang
 
 export namespace httpjiekou_hongtian
 {
+    export namespace shengchengdaima
+    {
+        export interface req
+        {
+            shujukuid: number;
+            kubiao: string;
+            baoming: string
+        }
+    }
     export namespace shanchu
     {
         export interface Res

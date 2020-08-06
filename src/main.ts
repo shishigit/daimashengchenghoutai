@@ -13,7 +13,7 @@ async function bootstrap()
     if (peizhiwenjian.kaifa) app.useGlobalInterceptors(kaifaRizhi);
 
     app.useGlobalFilters(new HttpYichang(), new ShujukuYichang());
-    app.useGlobalGuards(httpJianquan);
+    if (!peizhiwenjian.kaifa) app.useGlobalGuards(httpJianquan);
     app.use(memorysession);
 
     await gengxinJiekou();

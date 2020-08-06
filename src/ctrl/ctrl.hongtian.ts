@@ -37,7 +37,7 @@ export class CtrlHongtian
 
         let wenjian = await hongtianMoban.shengcheng(kubiao, canshu)
 
-        xiazaiwenjianService.xiazai(res, '配料数据.zip', wenjian)
+        xiazaiwenjianService.xiazai(res, '宏天代码.zip', wenjian)
     }
 
     @JJYPost('shanchu', '删除项目')

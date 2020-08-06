@@ -5,7 +5,7 @@ class XiazaiwenjianService
     xiazai(res: Response, wenjianming: string, wenjian: any)
     {
         res.attachment(encodeURI(wenjianming));
-        res.end(wenjianming);
+        res.end(wenjian);
     }
 }
 

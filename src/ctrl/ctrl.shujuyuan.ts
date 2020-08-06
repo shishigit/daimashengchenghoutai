@@ -31,6 +31,9 @@ export class CtrlShujuyuan
         @JJYBody() canshu: httpjiekou_shujuyuan.table.Req,
     ): Promise<httpjiekou_shujuyuan.table.Res>
     {
+        if (!canshu.shujukuid)
+            throw new YichangTishi('没有选取数据库')
+
         let lianjie = await sqlSjkLianjie.findById(canshu.shujukuid)
         let kubiaos = await ShujukuService.huoqu_table(lianjie)
         return kubiaos.map(value => value.name)

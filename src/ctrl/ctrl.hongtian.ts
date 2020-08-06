@@ -6,6 +6,7 @@ import {YichangTishi} from "../config/xitongyichang";
 import {HtXiangmu} from "../db/entities/ht.xiangmu";
 import {Response} from "express";
 import {xiazaiwenjianService} from "../serv/xiazaiwenjian.service";
+import {ShujukuService} from "../serv/shujuku.service";
 
 @JJYController('hongtian', '宏天项目接口')
 export class CtrlHongtian
@@ -17,6 +18,18 @@ export class CtrlHongtian
         @JJYRes() res: Response,
     )
     {
+        if (!canshu.shujukuid)
+            throw new YichangTishi('没有指定数据库')
+
+        let lianjie = await sqlSjkLianjie.findById(canshu.shujukuid)
+        if (!lianjie)
+            throw new YichangTishi('没有找到数据库')
+
+        let kubiao_list = await ShujukuService.huoqu_table(lianjie)
+        let kubiao = kubiao_list.filter(value => value.name === canshu.baoming).pop()
+        if (!kubiao)
+            throw new YichangTishi('没有找到数据表')
+
 
         xiazaiwenjianService.xiazai(res, '配料数据.xlsx', 'await workBook.xlsx.writeBuffer()')
     }

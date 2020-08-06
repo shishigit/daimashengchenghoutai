@@ -16,6 +16,7 @@ export class CtrlHongtian
         @JJYRes() res: Response,
     )
     {
+
         res.attachment(encodeURI('配料数据.xlsx'));
         res.end('await workBook.xlsx.writeBuffer()');
     }

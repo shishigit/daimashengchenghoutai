@@ -18,7 +18,7 @@ public class <%= mingcheng %> extends BaseModel<<%= mingcheng %>>
     private static final long serialVersionUID = 1L;
 
 <% if (zhujian) { %>
-    @TableId(value = "<%= zhujian.miaoshu %>", type = IdType.ASSIGN_ID)
+    @TableId(value = "<%= zhujian.mingcheng %>", type = IdType.ASSIGN_ID)
     private <%= zhujian.leixing %> <%= zhujian.mingcheng %>;
 
     public <%= zhujian.leixing %> get<%= zhujian.pashikamingcheng %>()
@@ -39,17 +39,17 @@ public class <%= mingcheng %> extends BaseModel<<%= mingcheng %>>
 <% } %>
 
 <% shuxing_list.forEach(function(shuxing){ %>
-    @TableField("<%= shuxing.miaoshu %>")
+    @TableField("<%= shuxing.mingcheng %>")
     private <%= shuxing.leixing %> <%= shuxing.mingcheng %>;
 
     public <%= shuxing.leixing %> get<%= shuxing.pashikamingcheng %>()
     {
-    return <%= shuxing.mingcheng %>;
+        return <%= shuxing.mingcheng %>;
     }
 
     public void set<%= shuxing.pashikamingcheng %>(<%= shuxing.leixing %> <%= shuxing.mingcheng %>)
     {
-    this.<%= shuxing.mingcheng %> = <%= shuxing.mingcheng %>;
+        this.<%= shuxing.mingcheng %> = <%= shuxing.mingcheng %>;
     }
 <% }); %>
 

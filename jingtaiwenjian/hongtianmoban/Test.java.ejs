@@ -1,0 +1,70 @@
+package <%= baoming %>.model;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.hotent.base.entity.BaseModel;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableField;
+import java.io.Serializable;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+* @company 汉鑫科技股份有限公司
+*/
+@ApiModel(value="<%= mingcheng %>对象", description="")
+public class <%= mingcheng %> extends BaseModel<<%= mingcheng %>> {
+
+private static final long serialVersionUID = 1L;
+
+<% if (zhujian) { %>
+    @TableId(value = "<%= zhujian.miaoshu %>", type = IdType.ASSIGN_ID)
+    private <%= zhujian.leixing %> <%= zhujian.mingcheng %>;
+
+    public <%= zhujian.leixing %> get<%= zhujian.pashikamingcheng %>()
+    {
+    return <%= zhujian.mingcheng %>;
+    }
+
+    public void set<%= zhujian.pashikamingcheng %>(<%= zhujian.leixing %> <%= zhujian.mingcheng %>)
+    {
+    this.<%= zhujian.mingcheng %> = <%= zhujian.mingcheng %>;
+    }
+
+    @Override
+    protected Serializable pkVal()
+    {
+    return this.<%= zhujian.mingcheng %>;
+    }
+
+<% } %>
+
+<% shuxing_list.forEach(function(shuxing){ %>
+    @TableField("<%= shuxing.miaoshu %>")
+    private <%= shuxing.leixing %> <%= shuxing.mingcheng %>;
+
+    public <%= shuxing.leixing %> get<%= shuxing.pashikamingcheng %>()
+    {
+    return <%= shuxing.mingcheng %>;
+    }
+
+    public void set<%= shuxing.pashikamingcheng %>(<%= shuxing.leixing %> <%= shuxing.mingcheng %>)
+    {
+    this.<%= shuxing.mingcheng %> = <%= shuxing.mingcheng %>;
+    }
+<% }); %>
+
+
+@Override
+public String toString()
+{
+return "<%= mingcheng %>{" +
+<% if (zhujian) { %>
+    "<%= zhujian.mingcheng %>=" + <%= zhujian.mingcheng %> +
+<% } %>
+<% shuxing_list.forEach(function(shuxing){ %>
+", <%= shuxing.mingcheng %>=" + <%= shuxing.mingcheng %> +
+<% }) %>
+"}";
+}
+}

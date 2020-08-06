@@ -25,6 +25,7 @@
     "log4js": "^6.3.0",
     "memorystore": "^1.6.2",
     "mysql": "^2.18.1",
+    "pascalcase": "^1.0.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.5.4",
     "typeorm": "^0.2.25"

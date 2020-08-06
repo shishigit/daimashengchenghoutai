@@ -23,3 +23,8 @@ export interface JJYSession
  * 当前系统支持的数据库类型
  */
 export const shujukuleixing_list = ['mysql', 'mariadb'] as const
+
+/**
+ * Java 语言数据类型
+ */
+export type javaleixing = 'String' | 'Integer'

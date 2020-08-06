@@ -7,6 +7,7 @@ import {HtXiangmu} from "../db/entities/ht.xiangmu";
 import {Response} from "express";
 import {xiazaiwenjianService} from "../serv/xiazaiwenjian.service";
 import {ShujukuService} from "../serv/shujuku.service";
+import {hongtianMoban} from "../serv/moban.service";
 
 @JJYController('hongtian', '宏天项目接口')
 export class CtrlHongtian
@@ -18,6 +19,9 @@ export class CtrlHongtian
         @JJYRes() res: Response,
     )
     {
+        if (!canshu.baoming)
+            throw new YichangTishi('没有指定包名')
+
         if (!canshu.shujukuid)
             throw new YichangTishi('没有指定数据库')
 
@@ -25,13 +29,15 @@ export class CtrlHongtian
         if (!lianjie)
             throw new YichangTishi('没有找到数据库')
 
+
         let kubiao_list = await ShujukuService.huoqu_table(lianjie)
-        let kubiao = kubiao_list.filter(value => value.name === canshu.baoming).pop()
+        let kubiao = kubiao_list.filter(value => value.name === canshu.kubiao).pop()
         if (!kubiao)
             throw new YichangTishi('没有找到数据表')
 
+        let wenjian = await hongtianMoban.shengcheng(kubiao, canshu)
 
-        xiazaiwenjianService.xiazai(res, '配料数据.xlsx', 'await workBook.xlsx.writeBuffer()')
+        xiazaiwenjianService.xiazai(res, '配料数据.zip', wenjian)
     }
 
     @JJYPost('shanchu', '删除项目')

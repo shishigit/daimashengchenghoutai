@@ -10,11 +10,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * 
- *
  * @company 汉鑫科技股份有限公司
- * @author 超级管理员
- * @since 2020-08-05
  */
 @ApiModel(value="Test对象", description="")
 public class Test extends BaseModel<Test> {

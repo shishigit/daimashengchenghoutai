@@ -4,11 +4,11 @@ import {YichangTishi} from '../config/xitongyichang';
 import {Response} from 'express';
 import {peizhiwenjian} from '../config/peizhiwenjian';
 import {httpjiekou_xitong} from "../qianhoutongyong/http.jiekou";
-import {jiami} from "../config/zaxiang";
 import {XtYonghu} from "../db/entities/xt.yonghu";
 import {sqlXtYonghu} from "../db/sql/sql.xt.yonghu";
 import {rizhiService} from "../serv/rizhi.service";
 import {JJYSession} from "../config/shujujiegou";
+import {jiamiService} from "../serv/jiami.service";
 
 @JJYController('xitong', '系统接口')
 export class CtrlXitong
@@ -23,7 +23,7 @@ export class CtrlXitong
         if (!body.mima) throw  new YichangTishi('密码不能为空');
         let yonghu: XtYonghu = await sqlXtYonghu.findByZhanghao(body.zhanghao);
         if (!yonghu || !yonghu.jihuo) throw new YichangTishi('账号或者密码错误！');
-        let fuhe = jiami.fuhe(body.mima, yonghu.mima);
+        let fuhe = jiamiService.fuhe(body.mima, yonghu.mima);
         if (!fuhe) throw new YichangTishi('账号或者密码错误！');
 
         session.yonghu = {id: yonghu.id, zhanghao: yonghu.zhanghao};

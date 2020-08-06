@@ -1,7 +1,7 @@
 import {ArgumentsHost, Catch, ExceptionFilter, ForbiddenException, HttpException} from '@nestjs/common';
 import {Request, Response} from 'express';
 import {QueryFailedError} from 'typeorm';
-import {xitongRizhi} from './zaxiang';
+import {rizhiService} from "../serv/rizhi.service";
 
 /**
  * HTTP 异常处理器
@@ -27,8 +27,8 @@ export class HttpYichang implements ExceptionFilter
             return;
         }
 
-        xitongRizhi.error(`HTTP异常  URL：${request.originalUrl}  BODY：${JSON.stringify(request.body)}`);
-        xitongRizhi.error(exception);
+        rizhiService.error(`HTTP异常  URL：${request.originalUrl}  BODY：${JSON.stringify(request.body)}`);
+        rizhiService.error(exception);
 
         response.status(600).json('系统异常！');
     }
@@ -46,8 +46,8 @@ export class ShujukuYichang implements ExceptionFilter
         const response = ctx.getResponse<Response>();
         const request = ctx.getRequest<Request>();
 
-        xitongRizhi.error(`SQL异常  URL：${request.originalUrl}  BODY：${JSON.stringify(request.body)}`);
-        xitongRizhi.error(exception);
+        rizhiService.error(`SQL异常  URL：${request.originalUrl}  BODY：${JSON.stringify(request.body)}`);
+        rizhiService.error(exception);
 
         response.status(600).json('系统异常！');
     }

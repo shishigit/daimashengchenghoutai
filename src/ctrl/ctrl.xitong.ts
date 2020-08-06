@@ -4,9 +4,10 @@ import {YichangTishi} from '../config/xitongyichang';
 import {Response} from 'express';
 import {peizhiwenjian} from '../config/peizhiwenjian';
 import {httpjiekou_xitong} from "../qianhoutongyong/http.jiekou";
-import {jiami, JJYSession, xitongRizhi} from "../config/zaxiang";
+import {jiami, JJYSession} from "../config/zaxiang";
 import {XtYonghu} from "../db/entities/xt.yonghu";
 import {sqlXtYonghu} from "../db/sql/sql.xt.yonghu";
+import {rizhiService} from "../serv/rizhi.service";
 
 @JJYController('xitong', '系统接口')
 export class CtrlXitong
@@ -38,8 +39,8 @@ export class CtrlXitong
         (session as Express.Session).destroy(err =>
         {
             if (!err) return
-            xitongRizhi.error(`销毁 Session 异常：${JSON.stringify(session.yonghu)}`)
-            xitongRizhi.error(err)
+            rizhiService.error(`销毁 Session 异常：${JSON.stringify(session.yonghu)}`)
+            rizhiService.error(err)
         })
         return {};
     }

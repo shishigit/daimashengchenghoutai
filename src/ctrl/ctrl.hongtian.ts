@@ -5,6 +5,7 @@ import {sqlSjkLianjie} from "../db/sql/sql.sjk.lianjie";
 import {YichangTishi} from "../config/xitongyichang";
 import {HtXiangmu} from "../db/entities/ht.xiangmu";
 import {Response} from "express";
+import {xiazaiwenjianService} from "../serv/xiazaiwenjian.service";
 
 @JJYController('hongtian', '宏天项目接口')
 export class CtrlHongtian
@@ -17,8 +18,7 @@ export class CtrlHongtian
     )
     {
 
-        res.attachment(encodeURI('配料数据.xlsx'));
-        res.end('await workBook.xlsx.writeBuffer()');
+        xiazaiwenjianService.xiazai(res, '配料数据.xlsx', 'await workBook.xlsx.writeBuffer()')
     }
 
     @JJYPost('shanchu', '删除项目')

@@ -1,0 +1,13 @@
+package <%= baoming %>;
+
+import <%= baoming %>.<%= mingcheng %>;
+import com.hotent.base.manager.BaseManager;
+
+/**
+ *  服务类
+ *
+ * @company 汉鑫科技股份有限公司
+ */
+public interface <%= mingcheng %>Manager extends BaseManager<<%= mingcheng %>> {
+
+}

@@ -1,0 +1,13 @@
+package <%= baoming %>;
+
+import <%= baoming %>.Test;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+/**
+ *  Mapper 接口
+ *
+ * @company 汉鑫科技股份有限公司
+ */
+public interface <%= mingcheng %>Dao extends BaseMapper<<%= mingcheng %>> {
+
+}

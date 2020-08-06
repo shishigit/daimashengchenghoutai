@@ -1,4 +1,4 @@
-package <%= baoming %>.model;
+package <%= baoming %>;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.hotent.base.entity.BaseModel;
@@ -55,16 +55,16 @@ private static final long serialVersionUID = 1L;
 <% }); %>
 
 
-@Override
-public String toString()
-{
-return "<%= mingcheng %>{" +
-<% if (zhujian) { %>
-    "<%= zhujian.mingcheng %>=" + <%= zhujian.mingcheng %> +
-<% } %>
-<% shuxing_list.forEach(function(shuxing){ %>
-    ", <%= shuxing.mingcheng %>=" + <%= shuxing.mingcheng %> +
-<% }) %>
-"}";
-}
+    @Override
+    public String toString()
+    {
+        return "<%= mingcheng %>{" +
+            <% if (zhujian) { %>
+                "<%= zhujian.mingcheng %>=" + <%= zhujian.mingcheng %> +
+            <% } %>
+            <% shuxing_list.forEach(function(shuxing){ %>
+                ", <%= shuxing.mingcheng %>=" + <%= shuxing.mingcheng %> +
+            <% }) %>
+            "}";
+    }
 }

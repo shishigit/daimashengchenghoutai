@@ -1,0 +1,17 @@
+package <%= baoming %>;
+
+import <%= baoming %>.<%= mingcheng %>;
+import <%= baoming %>.<%= mingcheng %>Dao;
+import <%= baoming %>.<%= mingcheng %>Manager;
+import com.hotent.base.manager.impl.BaseManagerImpl;
+import org.springframework.stereotype.Service;
+
+/**
+ *  服务实现类
+ *
+ * @company 汉鑫科技股份有限公司
+ */
+@Service
+public class <%= mingcheng %>ManagerImpl extends BaseManagerImpl<<%= mingcheng %>Dao, <%= mingcheng %>> implements <%= mingcheng %>Manager {
+
+}

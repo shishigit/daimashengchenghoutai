@@ -122,6 +122,52 @@ export namespace httpjiekou_zaxiang
     }
 }
 
+
+export namespace httpjiekou_jjyts
+{
+    export namespace chaxun
+    {
+        export interface Req
+        {
+            mingcheng: string
+        }
+
+        export interface Res
+        {
+            id: number
+            mingcheng: string
+            beizhu: string
+            shujukumingcheng: string
+            shujukuid: number
+        }
+    }
+    export namespace tianjia
+    {
+        export interface Res
+        {
+
+        }
+
+        export interface Req
+        {
+            mingcheng: string;
+            beizhu: string;
+            shujukuid: number
+        }
+    }
+    export namespace shanchu
+    {
+        export interface Res
+        {
+
+        }
+
+        export interface Req
+        {
+            id: number
+        }
+    }
+}
 export namespace httpjiekou_hongtian
 {
     export namespace shengchengdaima

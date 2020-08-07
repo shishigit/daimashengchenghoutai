@@ -1,31 +1,16 @@
 import {BaseEntity, Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
 import {RequestMethod} from '@nestjs/common';
-import {JianquanLeixing} from "../../config/shujujiegou";
 
-/**
- * 系统提供的接口
- */
-@Entity({name: 'xt_jiekou'})
-export class XtJiekou extends BaseEntity
+@Entity({name: '<%= biaoming %>'})
+export class <%= tsclassname %> extends BaseEntity
 {
-    @PrimaryGeneratedColumn({comment: 'ID'})
-    id: number;
+<% if (zhujian) { %>
+    @PrimaryGeneratedColumn({comment: '<%= zhujian.beizhu %>'})
+    <%= zhujian.lieming %>: <%= zhujian.leixing %>;
+<% } %>
 
-    @Column({nullable: false, comment: '请求方法'})
-    method: 'post' | 'get' | 'all';
-
-    @Column({nullable: false, unique: true, comment: 'URL'})
-    url: string;
-
-    @Column({nullable: false, comment: '分组'})
-    fenzu: string;
-
-    @Column({nullable: false, comment: '说明'})
-    shuoming: string;
-
-    @Column({nullable: false, comment: '启用与否'})
-    qiyong: boolean;
-
-    @Column({nullable: false, comment: '鉴权类型'})
-    jianquan: JianquanLeixing;
+<% shuxings.forEach(function(shuxing){ %>
+    @Column({nullable: <%= !shuxing.feikong %>, unique: <%= shuxing.weiyi %>, comment: '<%= shuxing.beizhu %>'})
+    <%= shuxing.lieming %>: <%= shuxing.leixing %>;
+<% }); %>
 }

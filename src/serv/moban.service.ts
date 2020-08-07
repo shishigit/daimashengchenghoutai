@@ -1,14 +1,65 @@
 import * as fs from 'fs'
 import {peizhiwenjian} from "../config/peizhiwenjian";
 import {Table} from "typeorm";
-import {httpjiekou_hongtian} from "../qianhoutongyong/http.jiekou";
+import {httpjiekou_hongtian, httpjiekou_jjyts} from "../qianhoutongyong/http.jiekou";
 import * as JSZip from "jszip";
 import {javaleixing} from "../config/shujujiegou";
 import {shujuku2java} from "./shujuku2java";
+import {jjyts_lieleixing} from "../qianhoutongyong/tongyongjiegou";
 
 const ejs = require('ejs')
 const pascalcase = require('pascalcase');
 
+/*************************************************************************
+ * JJYTS模板
+ *************************************************************************/
+
+interface jjyts_kubiao
+{
+    tsclassname: string,
+    biaoming: string,
+    zhujian?: {
+        lieming: string
+        leixing: jjyts_lieleixing
+        beizhu: string,
+        weiyi: boolean,
+        feikong: boolean
+    },
+    shuxings: {
+        lieming: string
+        leixing: jjyts_lieleixing
+        beizhu: string,
+        weiyi: boolean,
+        feikong: boolean
+    }[],
+}
+
+class JjytsMoban
+{
+    private kubiao_txt = fs.readFileSync(peizhiwenjian.jingtairoot + '/jjytsmoban/kubiao.txt').toString()
+
+    shengchengkubiao(canshu: httpjiekou_jjyts.chuangjiankubiao.req)
+    {
+        let zip = new JSZip();
+
+        let kubiaocanshu: jjyts_kubiao = {
+            tsclassname: pascalcase(canshu.biaoming),
+            biaoming: canshu.biaoming,
+            shuxings: canshu.shuxings.filter(value => !value.zhujian),
+            zhujian: canshu.shuxings.filter(value => value.zhujian).pop()
+        }
+        let kubiao = ejs.render(this.kubiao_txt, kubiaocanshu)
+        zip.file(pascalcase(canshu.biaoming) + '.ts', kubiao)
+
+        return zip.generateAsync({type: 'nodebuffer'})
+    }
+}
+
+export const jjytsMoban = new JjytsMoban()
+
+/*************************************************************************
+ * 宏天模板
+ *************************************************************************/
 interface shiti_java
 {
     mingcheng: string

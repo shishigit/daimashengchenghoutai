@@ -50,7 +50,7 @@ export class CtrlJjyts
         if (canshu.shuxings.filter(value => value.zhujian).length > 1)
             throw new YichangTishi('多个主键！')
 
-        let wenjian = jjytsMoban.shengchengkubiao(canshu)
+        let wenjian = await jjytsMoban.shengchengkubiao(canshu)
         xiazaiwenjianService.xiazai(res, 'JJYTS.zip', wenjian)
     }
 

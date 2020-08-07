@@ -12,7 +12,6 @@ import {Response} from "express";
 @JJYController('jjyts', '宏天项目接口')
 export class CtrlJjyts
 {
-
     @JJYPost('shengchengdaima', '生成代码')
     async shengchengdaima(
         @JJYBody() canshu: httpjiekou_jjyts.shengchengdaima.req,
@@ -37,6 +36,16 @@ export class CtrlJjyts
         // TODO 这里需要修改模板
         let wenjian = await hongtianMoban.shengcheng(kubiao, canshu)
         xiazaiwenjianService.xiazai(res, 'JJYTS.zip', wenjian)
+    }
+
+    @JJYPost('chuangjiankubiao', '创建库表')
+    async chuangjiankubiao(
+        @JJYBody() canshu: httpjiekou_jjyts.chuangjiankubiao.req,
+        @JJYRes() res: Response,
+    )
+    {
+
+        xiazaiwenjianService.xiazai(res, 'JJYTS.zip', 'wenjian')
     }
 
     @JJYPost('shanchu', '删除项目')

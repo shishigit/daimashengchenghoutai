@@ -1,3 +1,5 @@
+import {jjyts_lieleixing} from "./tongyongjiegou";
+
 export namespace httpjiekou_xitong
 {
     export namespace denglu
@@ -125,6 +127,20 @@ export namespace httpjiekou_zaxiang
 
 export namespace httpjiekou_jjyts
 {
+    export namespace chuangjiankubiao
+    {
+        export interface req
+        {
+            biaoming: string,
+            shuxings: {
+                lieming: string
+                leixing: jjyts_lieleixing
+                beizhu: string,
+                weiyi: boolean,
+                feikong: boolean
+            }[]
+        }
+    }
     export namespace chaxun
     {
         export interface Req

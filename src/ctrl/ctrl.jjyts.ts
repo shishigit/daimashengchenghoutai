@@ -1,61 +1,57 @@
-import {JJYBody, JJYController, JJYPost, JJYRes} from '../config/zhujie';
-import {httpjiekou_hongtian} from "../qianhoutongyong/http.jiekou";
-import {sqlHtXiangmu} from "../db/sql/sql.ht.xiangmu";
+import {JJYBody, JJYController, JJYPost} from '../config/zhujie';
+import {httpjiekou_jjyts} from "../qianhoutongyong/http.jiekou";
 import {sqlSjkLianjie} from "../db/sql/sql.sjk.lianjie";
 import {YichangTishi} from "../config/xitongyichang";
-import {HtXiangmu} from "../db/entities/ht.xiangmu";
-import {Response} from "express";
-import {xiazaiwenjianService} from "../serv/xiazaiwenjian.service";
-import {ShujukuService} from "../serv/shujuku.service";
-import {hongtianMoban} from "../serv/moban.service";
+import {sqlTsXiangmu} from "../db/sql/sql.ts.xiangmu";
+import {TsXiangmu} from "../db/entities/ts.xiangmu";
 
-@JJYController('hongtian', '宏天项目接口')
-export class CtrlHongtian
+@JJYController('jjyts', '宏天项目接口')
+export class CtrlJjyts
 {
 
-    @JJYPost('shengchengdaima', '生成代码')
-    async shengchengdaima(
-        @JJYBody() canshu: httpjiekou_hongtian.shengchengdaima.req,
-        @JJYRes() res: Response,
-    )
-    {
-        if (!canshu.baoming)
-            throw new YichangTishi('没有指定包名')
-
-        if (!canshu.shujukuid)
-            throw new YichangTishi('没有指定数据库')
-
-        let lianjie = await sqlSjkLianjie.findById(canshu.shujukuid)
-        if (!lianjie)
-            throw new YichangTishi('没有找到数据库')
-
-
-        let kubiao_list = await ShujukuService.huoqu_table(lianjie)
-        let kubiao = kubiao_list.filter(value => value.name === canshu.kubiao).pop()
-        if (!kubiao)
-            throw new YichangTishi('没有找到数据表')
-
-        let wenjian = await hongtianMoban.shengcheng(kubiao, canshu)
-
-        xiazaiwenjianService.xiazai(res, '宏天代码.zip', wenjian)
-    }
+    // @JJYPost('shengchengdaima', '生成代码')
+    // async shengchengdaima(
+    //     @JJYBody() canshu: httpjiekou_jjyts.shengchengdaima.req,
+    //     @JJYRes() res: Response,
+    // )
+    // {
+    //     if (!canshu.baoming)
+    //         throw new YichangTishi('没有指定包名')
+    //
+    //     if (!canshu.shujukuid)
+    //         throw new YichangTishi('没有指定数据库')
+    //
+    //     let lianjie = await sqlSjkLianjie.findById(canshu.shujukuid)
+    //     if (!lianjie)
+    //         throw new YichangTishi('没有找到数据库')
+    //
+    //
+    //     let kubiao_list = await ShujukuService.huoqu_table(lianjie)
+    //     let kubiao = kubiao_list.filter(value => value.name === canshu.kubiao).pop()
+    //     if (!kubiao)
+    //         throw new YichangTishi('没有找到数据表')
+    //
+    //     let wenjian = await hongtianMoban.shengcheng(kubiao, canshu)
+    //
+    //     xiazaiwenjianService.xiazai(res, '宏天代码.zip', wenjian)
+    // }
 
     @JJYPost('shanchu', '删除项目')
     async shanchu(
-        @JJYBody() canshu: httpjiekou_hongtian.shanchu.Req,
-    ): Promise<httpjiekou_hongtian.shanchu.Res>
+        @JJYBody() canshu: httpjiekou_jjyts.shanchu.Req,
+    ): Promise<httpjiekou_jjyts.shanchu.Res>
     {
-        return sqlHtXiangmu.deleteByID(canshu.id)
+        return sqlTsXiangmu.deleteByID(canshu.id)
     }
 
     @JJYPost('chaxun', '查询项目')
     async chaxun(
-        @JJYBody() canshu: httpjiekou_hongtian.chaxun.Req,
-    ): Promise<httpjiekou_hongtian.chaxun.Res[]>
+        @JJYBody() canshu: httpjiekou_jjyts.chaxun.Req,
+    ): Promise<httpjiekou_jjyts.chaxun.Res[]>
     {
-        let htXiangmus = await sqlHtXiangmu.findByMingcheng(canshu.mingcheng)
-        let shujukus = await sqlSjkLianjie.findByIds(htXiangmus.map(value => value.shujuku as any))
-        return htXiangmus.map(value =>
+        let tsXiangmus = await sqlTsXiangmu.findByMingcheng(canshu.mingcheng)
+        let shujukus = await sqlSjkLianjie.findByIds(tsXiangmus.map(value => value.shujuku as any))
+        return tsXiangmus.map(value =>
         {
             let shujuku = shujukus.filter(value1 => value1.id === value.shujuku as any).pop()
             return {
@@ -70,8 +66,8 @@ export class CtrlHongtian
 
     @JJYPost('tianjia', '添加项目')
     async tianjia(
-        @JJYBody() canshu: httpjiekou_hongtian.tianjia.Req,
-    ): Promise<httpjiekou_hongtian.tianjia.Res>
+        @JJYBody() canshu: httpjiekou_jjyts.tianjia.Req,
+    ): Promise<httpjiekou_jjyts.tianjia.Res>
     {
         if (!canshu.shujukuid || canshu.shujukuid < 0)
             throw new YichangTishi(`数据库不能为空`)
@@ -81,11 +77,11 @@ export class CtrlHongtian
             throw new YichangTishi(`数据库不存在`)
 
 
-        let htXiangmu = new HtXiangmu()
-        htXiangmu.shujuku = shujuku.pop()
-        htXiangmu.beizhu = canshu.beizhu
-        htXiangmu.mingcheng = canshu.mingcheng
-        await htXiangmu.save()
+        let tsXiangmu = new TsXiangmu()
+        tsXiangmu.shujuku = shujuku.pop()
+        tsXiangmu.beizhu = canshu.beizhu
+        tsXiangmu.mingcheng = canshu.mingcheng
+        await tsXiangmu.save()
 
         return {}
     }

@@ -28,24 +28,4 @@ export class XtJiekou extends BaseEntity
 
     @Column({nullable: false, comment: '鉴权类型'})
     jianquan: JianquanLeixing;
-
-    constructor(
-        url: string,
-        method: RequestMethod,
-        fenzu: string,
-        shuoming: string,
-        qiyong: boolean,
-        jianquan: JianquanLeixing)
-    {
-        super();
-
-        this.url = url;
-        if (method === RequestMethod.POST) this.method = 'post';
-        if (method === RequestMethod.GET) this.method = 'get';
-        if (method === RequestMethod.ALL) this.method = 'all';
-        this.fenzu = fenzu;
-        this.shuoming = shuoming;
-        this.qiyong = qiyong;
-        this.jianquan = jianquan;
-    }
 }

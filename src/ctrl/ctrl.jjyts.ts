@@ -36,7 +36,7 @@ export class CtrlJjyts
 
         // TODO 这里需要修改模板
         let wenjian = await hongtianMoban.shengcheng(kubiao, canshu)
-        xiazaiwenjianService.xiazai(res, '宏天代码.zip', wenjian)
+        xiazaiwenjianService.xiazai(res, 'JJYTS.zip', wenjian)
     }
 
     @JJYPost('shanchu', '删除项目')

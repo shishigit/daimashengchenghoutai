@@ -167,6 +167,15 @@ export namespace httpjiekou_jjyts
             id: number
         }
     }
+    export namespace shengchengdaima
+    {
+        export interface req
+        {
+            shujukuid: number;
+            kubiao: string;
+            baoming: string
+        }
+    }
 }
 export namespace httpjiekou_hongtian
 {

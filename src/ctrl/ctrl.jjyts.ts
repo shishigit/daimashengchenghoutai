@@ -1,40 +1,43 @@
-import {JJYBody, JJYController, JJYPost} from '../config/zhujie';
+import {JJYBody, JJYController, JJYPost, JJYRes} from '../config/zhujie';
 import {httpjiekou_jjyts} from "../qianhoutongyong/http.jiekou";
 import {sqlSjkLianjie} from "../db/sql/sql.sjk.lianjie";
 import {YichangTishi} from "../config/xitongyichang";
 import {sqlTsXiangmu} from "../db/sql/sql.ts.xiangmu";
 import {TsXiangmu} from "../db/entities/ts.xiangmu";
+import {ShujukuService} from "../serv/shujuku.service";
+import {hongtianMoban} from "../serv/moban.service";
+import {xiazaiwenjianService} from "../serv/xiazaiwenjian.service";
+import {Response} from "express";
 
 @JJYController('jjyts', '宏天项目接口')
 export class CtrlJjyts
 {
 
-    // @JJYPost('shengchengdaima', '生成代码')
-    // async shengchengdaima(
-    //     @JJYBody() canshu: httpjiekou_jjyts.shengchengdaima.req,
-    //     @JJYRes() res: Response,
-    // )
-    // {
-    //     if (!canshu.baoming)
-    //         throw new YichangTishi('没有指定包名')
-    //
-    //     if (!canshu.shujukuid)
-    //         throw new YichangTishi('没有指定数据库')
-    //
-    //     let lianjie = await sqlSjkLianjie.findById(canshu.shujukuid)
-    //     if (!lianjie)
-    //         throw new YichangTishi('没有找到数据库')
-    //
-    //
-    //     let kubiao_list = await ShujukuService.huoqu_table(lianjie)
-    //     let kubiao = kubiao_list.filter(value => value.name === canshu.kubiao).pop()
-    //     if (!kubiao)
-    //         throw new YichangTishi('没有找到数据表')
-    //
-    //     let wenjian = await hongtianMoban.shengcheng(kubiao, canshu)
-    //
-    //     xiazaiwenjianService.xiazai(res, '宏天代码.zip', wenjian)
-    // }
+    @JJYPost('shengchengdaima', '生成代码')
+    async shengchengdaima(
+        @JJYBody() canshu: httpjiekou_jjyts.shengchengdaima.req,
+        @JJYRes() res: Response,
+    )
+    {
+        if (!canshu.baoming)
+            throw new YichangTishi('没有指定包名')
+
+        if (!canshu.shujukuid)
+            throw new YichangTishi('没有指定数据库')
+
+        let lianjie = await sqlSjkLianjie.findById(canshu.shujukuid)
+        if (!lianjie)
+            throw new YichangTishi('没有找到数据库')
+
+        let kubiao_list = await ShujukuService.huoqu_table(lianjie)
+        let kubiao = kubiao_list.filter(value => value.name === canshu.kubiao).pop()
+        if (!kubiao)
+            throw new YichangTishi('没有找到数据表')
+
+        // TODO 这里需要修改模板
+        let wenjian = await hongtianMoban.shengcheng(kubiao, canshu)
+        xiazaiwenjianService.xiazai(res, '宏天代码.zip', wenjian)
+    }
 
     @JJYPost('shanchu', '删除项目')
     async shanchu(

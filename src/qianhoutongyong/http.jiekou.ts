@@ -137,7 +137,8 @@ export namespace httpjiekou_jjyts
                 leixing: jjyts_lieleixing
                 beizhu: string,
                 weiyi: boolean,
-                feikong: boolean
+                feikong: boolean,
+                zhujian: boolean
             }[]
         }
     }

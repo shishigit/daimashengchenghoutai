@@ -5,7 +5,7 @@ import {YichangTishi} from "../config/xitongyichang";
 import {sqlTsXiangmu} from "../db/sql/sql.ts.xiangmu";
 import {TsXiangmu} from "../db/entities/ts.xiangmu";
 import {ShujukuService} from "../serv/shujuku.service";
-import {hongtianMoban} from "../serv/moban.service";
+import {hongtianMoban, jjytsMoban} from "../serv/moban.service";
 import {xiazaiwenjianService} from "../serv/xiazaiwenjian.service";
 import {Response} from "express";
 
@@ -44,8 +44,14 @@ export class CtrlJjyts
         @JJYRes() res: Response,
     )
     {
+        if (!canshu.biaoming)
+            throw new YichangTishi('没有指定表名！')
 
-        xiazaiwenjianService.xiazai(res, 'JJYTS.zip', 'wenjian')
+        if (canshu.shuxings.filter(value => value.zhujian).length > 1)
+            throw new YichangTishi('多个主键！')
+
+        let wenjian = jjytsMoban.shengchengkubiao(canshu)
+        xiazaiwenjianService.xiazai(res, 'JJYTS.zip', wenjian)
     }
 
     @JJYPost('shanchu', '删除项目')
